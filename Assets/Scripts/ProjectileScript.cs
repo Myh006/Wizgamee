@@ -12,7 +12,7 @@ public class ProjectileScript : MonoBehaviour
 
     int fireAttack = 30;
 
-    float rotDiff = 90f;
+    float rotDiff = 180f;
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
