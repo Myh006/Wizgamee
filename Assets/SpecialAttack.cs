@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class SpecialAttack : MonoBehaviour
 {
-   public PManaBar pManaBar;
-
-    float manaInterval = 2f;
+    public GameObject spAtk;
+    public PManaBar pManaBar;
+    public Transform location;
+    float manaInterval = 0.3f;
     float nextManaTime;
 
-   public int damage = 100;
+    public int damage = 100;
     public int maxPMana = 100;
     public int currentPMana = 0;
 
 
     private void Start()
     {
-        currentPMana = maxPMana;
+        currentPMana = 0;
         nextManaTime = Time.time + manaInterval;
         pManaBar.SetMaxMana(maxPMana);
     }
@@ -27,19 +28,20 @@ public class SpecialAttack : MonoBehaviour
             {
                 currentPMana = maxPMana;
             }
-            else 
-            { 
-            currentPMana += 20;
-            nextManaTime = Time.time + manaInterval;
+            else
+            {
+                currentPMana += 1;
+                nextManaTime = Time.time + manaInterval;
             }
-            
-            
+
+
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && currentPMana >= 100)
         {
             Debug.Log("Hello world");
             // Perform your action here
+            Instantiate(spAtk, location.position, Quaternion.identity);
 
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -51,12 +53,12 @@ public class SpecialAttack : MonoBehaviour
                 if (enemyHealth != null)
                 {
                     enemyHealth.TakeDamage(damage);
-                    currentPMana = 0;
-                   
+
                 }
-               
+                
+
             }
-            
+            currentPMana = 0;
         }
     }
 }
